@@ -113,8 +113,8 @@ window.addEventListener('mousemove', e => {
 });
 
 window.addEventListener('mouseup', e => {
-	mouseX = e.clientX;
-	mouseY = e.clientY;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
     if (isWriting) {
         raw_matrix = parseGrid();
@@ -145,16 +145,43 @@ window.addEventListener('mouseup', e => {
                         ticks: {
                             fontSize: 30
                         }
-    
+
                     }],
                     yAxes: [{
                         ticks: {
                             fontSize: 25
-                        } 
+                        }
                     }]
                 }
             }
         });
     }
-	isWriting = false;
+    isWriting = false;
 });
+
+// Load MNIST_Model...
+
+let model = null;
+
+async function loadNeuralNet() {
+    // link for your model.json
+    model = await tf.loadLayersModel('https://raw.githubusercontent.com/doctorget/deploy-model-web/master/model/model.json');
+}
+
+// Parses our grid into a matrix so we can then convert to a tensor.
+let parseGrid = () => {
+	matrix = [];
+	for (let i = 0; i < gridHeight; i++) {
+		matrix_col = [];
+		for (let j = 0; j < gridWidth; j++) {
+			if (pixels[j + (gridHeight * i)].isOn) {
+				matrix_col.push(1.);
+			} else {
+				matrix_col.push(0);
+			}
+		}
+		matrix.push(matrix_col);
+	}
+	// Transpose the matrix...
+	return matrix[0].map((col, i) => matrix.map(row => row[i]));
+}
