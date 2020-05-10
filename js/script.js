@@ -62,7 +62,20 @@ let createPanel = () => {
 
     gridBounding = [anchorX, anchorX + (pixelDim * gridWidth), anchorY, anchorY + (pixelDim * gridHeight)];
 
+    for (let i = 0; i < gridHeight; i++) {
+		let x = anchorX + (pixelDim * i);
+		for (let j = 0; j < gridWidth; j++) {
+			let y = anchorY + (pixelDim * j);
+			let p = new Pixel(x, y, pixelDim);
+			p.draw();
+			pixels.push(p);
+		}
+	}
+}
 
+let inBounds = (x, y, target) => {
+	return (x > target[0] && x < target[1]) &&
+		(y > target[2] && y < target[3]);
 }
 
 let pixelDim = null;
