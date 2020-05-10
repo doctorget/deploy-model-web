@@ -1,5 +1,5 @@
 let canvas = document.querySelector('canvas');
-let ctx_ = document.getElementById('chart').getContext('2d');
+let ctx_ = document.getElementById('panel').getContext('2d');
 
 let ctx = canvas.getContext('2d');
 let isWriting = false;
@@ -14,3 +14,11 @@ let reset = () => {
 	pixels = [];
 	createGrid();
 }
+
+window.onload = updateCanvas();
+window.addEventListener('resize', e => reset());
+window.addEventListener('keyup', e => {
+    if(e.keyCode == 67) {
+        reset();
+    }
+});

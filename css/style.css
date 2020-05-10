@@ -14,7 +14,7 @@ body{
 	z-index: 0;
 }
 
-#chart {
+#panel {
 	position: fixed;
 	left: 31.5%;
 	top: 2.5%;
