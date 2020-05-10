@@ -54,6 +54,12 @@ class Pixel {
     }
 }
 
+let pixelDim = null;
+let anchorX = null;
+let anchorY = null;
+let gridBounding = null;
+
+
 let createPanel = () => {
 
     pixelDim = 20;
@@ -63,22 +69,45 @@ let createPanel = () => {
     gridBounding = [anchorX, anchorX + (pixelDim * gridWidth), anchorY, anchorY + (pixelDim * gridHeight)];
 
     for (let i = 0; i < gridHeight; i++) {
-		let x = anchorX + (pixelDim * i);
-		for (let j = 0; j < gridWidth; j++) {
-			let y = anchorY + (pixelDim * j);
-			let p = new Pixel(x, y, pixelDim);
-			p.draw();
-			pixels.push(p);
-		}
-	}
+        let x = anchorX + (pixelDim * i);
+        for (let j = 0; j < gridWidth; j++) {
+            let y = anchorY + (pixelDim * j);
+            let p = new Pixel(x, y, pixelDim);
+            p.draw();
+            pixels.push(p);
+        }
+    }
 }
 
 let inBounds = (x, y, target) => {
-	return (x > target[0] && x < target[1]) &&
-		(y > target[2] && y < target[3]);
+    return (x > target[0] && x < target[1]) &&
+        (y > target[2] && y < target[3]);
 }
 
-let pixelDim = null;
-let anchorX = null;
-let anchorY = null;
-let gridBounding = null;
+window.addEventListener('mousedown', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (inBounds(mouseX, mouseY, gridBounding)) {
+        isWriting = true;
+    }
+});
+
+window.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!inBounds(mouseX, mouseY, gridBounding)) {
+        isWriting = false;
+    }
+    else if (isWriting) {
+        pixels.forEach(p => {
+            if (!p.isOn) {
+                if (inBounds(mouseX, mouseY, p.bounding)) {
+                    p.isOn = true;
+                    p.draw();
+                }
+            }
+        });
+    }
+});
