@@ -165,7 +165,7 @@ let model = null;
 
 async function loadNeuralNet() {
     // link for your model.json
-    model = await tf.loadLayersModel('https://qodatecnologia.github.io/tfjs/json/model.json');
+    model = await tf.loadLayersModel('https://raw.githubusercontent.com/doctorget/deploy-model-web/master/model/model.json');
 }
 
 // Parses our grid into a matrix so we can then convert to a tensor.
