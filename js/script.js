@@ -111,3 +111,50 @@ window.addEventListener('mousemove', e => {
         });
     }
 });
+
+window.addEventListener('mouseup', e => {
+	mouseX = e.clientX;
+	mouseY = e.clientY;
+
+    if (isWriting) {
+        raw_matrix = parseGrid();
+        // Predict with CNN.
+        let softmax = predict(raw_matrix).dataSync();
+        let preds = Array.from(softmax).map(n => parseFloat(n.toPrecision(4)));
+        console.log(preds);
+
+        let bar = Chart.Bar(ctx_, {
+            // The data for our dataset
+            data: {
+                labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+                datasets: [{
+                    backgroundColor: 'rgba(247, 127, 155, 0.5)',
+                    borderColor: 'black',
+                    data: preds,
+                    borderWidth: 2
+                }]
+            },
+            // Configuration options
+            options: {
+                legend: {
+                    display: false,
+                },
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 30
+                        }
+    
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 25
+                        } 
+                    }]
+                }
+            }
+        });
+    }
+	isWriting = false;
+});
