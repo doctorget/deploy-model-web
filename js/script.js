@@ -12,7 +12,7 @@ let updateCanvas = () => {
 let reset = () => {
     updateCanvas();
     pixels = [];
-    createGrid();
+    createPanel();
 }
 
 window.onload = updateCanvas();
@@ -63,17 +63,17 @@ let gridBounding = null;
 let createPanel = () => {
 
     pixelDim = 20;
-    anchorX = (canvas.width / 2) - (pixelDim * (gridWidth / 2));
-    anchorY = canvas.height / 2 - (pixelDim * (gridHeight / 5));
+    anchorX = (canvas.width / 2) - (pixelDim * (panelWidth / 2));
+    anchorY = canvas.height / 2 - (pixelDim * (panelHeight / 5));
 
-    gridBounding = [anchorX, anchorX + (pixelDim * gridWidth), anchorY, anchorY + (pixelDim * gridHeight)];
+    gridBounding = [anchorX, anchorX + (pixelDim * panelWidth), anchorY, anchorY + (pixelDim * panelHeight)];
 
-    for (let i = 0; i < gridHeight; i++) {
+    for (let i = 0; i < panelHeight; i++) {
         let x = anchorX + (pixelDim * i);
-        for (let j = 0; j < gridWidth; j++) {
+        for (let j = 0; j < panelWidth; j++) {
             let y = anchorY + (pixelDim * j);
             let p = new Pixel(x, y, pixelDim);
-            p.draw();
+            p.swipe();
             pixels.push(p);
         }
     }
@@ -105,7 +105,7 @@ window.addEventListener('mousemove', e => {
             if (!p.isOn) {
                 if (inBounds(mouseX, mouseY, p.bounding)) {
                     p.isOn = true;
-                    p.draw();
+                    p.swipe();
                 }
             }
         });
@@ -117,7 +117,7 @@ window.addEventListener('mouseup', e => {
     mouseY = e.clientY;
 
     if (isWriting) {
-        raw_matrix = parseGrid();
+        raw_matrix = parsePanel();
         // Predict with CNN.
         let softmax = predict(raw_matrix).dataSync();
         let preds = Array.from(softmax).map(n => parseFloat(n.toPrecision(4)));
@@ -165,16 +165,16 @@ let model = null;
 
 async function loadNeuralNet() {
     // link for your model.json
-    model = await tf.loadLayersModel('https://raw.githubusercontent.com/doctorget/deploy-model-web/master/model/model.json');
+    model = await tf.loadLayersModel('https://qodatecnologia.github.io/tfjs/json/model.json');
 }
 
 // Parses our grid into a matrix so we can then convert to a tensor.
-let parseGrid = () => {
+let parsePanel = () => {
 	matrix = [];
-	for (let i = 0; i < gridHeight; i++) {
+	for (let i = 0; i < panelHeight; i++) {
 		matrix_col = [];
-		for (let j = 0; j < gridWidth; j++) {
-			if (pixels[j + (gridHeight * i)].isOn) {
+		for (let j = 0; j < panelWidth; j++) {
+			if (pixels[j + (panelHeight * i)].isOn) {
 				matrix_col.push(1.);
 			} else {
 				matrix_col.push(0);
@@ -192,5 +192,5 @@ let predict = (r) => {
 	return model.predict(tensor);
 };
 
-createGrid();
+createPanel();
 loadNeuralNet();
