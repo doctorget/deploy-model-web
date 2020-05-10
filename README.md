@@ -1,2 +1,3 @@
 # deploy-model-web
- This repository contains the web application with the Tensorflow model for recognizing numbers
+ This repository contains the web app with the Tensorflow neural net model for recognizing numbers with tfjs
+  
