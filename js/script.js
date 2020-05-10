@@ -22,3 +22,22 @@ window.addEventListener('keyup', e => {
         reset();
     }
 });
+
+const panelHeight = 28;
+const panelWidth = 28;
+
+let mouseX = 0;
+let mouseY = 0;
+
+let pixels = [];
+
+class Pixel {
+	constructor(x, y, dim) {
+		this.x = x;
+		this.y = y;
+		this.isOn = false;
+		this.dim = dim;
+		this.bounding = [x, x + dim, y, y + dim];
+    }
+    
+}
