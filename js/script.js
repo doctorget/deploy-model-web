@@ -185,3 +185,12 @@ let parseGrid = () => {
 	// Transpose the matrix...
 	return matrix[0].map((col, i) => matrix.map(row => row[i]));
 }
+
+let predict = (r) => {
+	tensor = tf.tensor(r, [28, 28, 1], 'float32');
+	tensor = tf.expandDims(tensor, 0);
+	return model.predict(tensor);
+};
+
+createGrid();
+loadNeuralNet();
