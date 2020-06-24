@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Classifier of manuscript whole numbers</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
@@ -14,16 +14,18 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
-            aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <a class="navbar-brand" href="#">CNN with MNIST</a>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="https://www.researchgate.net/publication/285164623_An_Introduction_to_Convolutional_Neural_Networks">About CNN</a><span class="sr-only">(current)</span></a>
+                    <a class="nav-link"
+                        href="https://www.researchgate.net/publication/285164623_An_Introduction_to_Convolutional_Neural_Networks">About
+                        CNN</a><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.tensorflow.org/api_docs">About Tensorflow</a>
@@ -38,10 +40,27 @@
             </form>
         </div>
     </nav>
-    <div>
-        <h1>
-            with the mouse write a number from 0 to 9 in the black box</h1>
+
+
+    <div class="alert alert-dark" role="alert">
+        <h2> with the mouse write a number from 0 to 9 in the black box</h2>
+        <svg class="bi bi-arrow-down-square-fill" style="float:inline-start;" width="4em" height="4em" viewBox="-0 0 17 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 5a.5.5 0 0 0-1 0v4.793L5.354 7.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 9.793V5z" />
+        </svg>
     </div>
+
+
+
+    <!-- <div class="container">
+            <svg class="bi bi-arrow-down-square-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 5a.5.5 0 0 0-1 0v4.793L5.354 7.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 9.793V5z" />
+            </svg>
+        </div> -->
+
     <div id="wrapper" style="position: relative;">
         <div class="row">
             <canvas id='grid'></canvas>
@@ -49,7 +68,7 @@
         </div>
 
     </div>
-    <div class="container">
+    <div class="container footer">
         <footer class="footer"> did you like this repository? don't forget to starred this! :) Thank You</footer>
     </div>
     <script type="text/javascript" src="js/script.js"></script>
